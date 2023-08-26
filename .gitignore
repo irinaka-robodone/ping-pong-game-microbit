@@ -1,0 +1,9 @@
+audio
+audio/
+microbit
+microbit/
+music
+music/
+*_cache_*
+*env
+*.pyc
