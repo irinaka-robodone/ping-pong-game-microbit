@@ -19,16 +19,7 @@ while True:
     barx = (2,3)
     ballv = [1, 1] # 速度は英語で Velocity
     gameover = False
-    
-    # ゲームのステート初期化（ランダムでやる場合）
-    ballx = random.randrange(0, 4)
-    bally = random.randrange(0, 1)
-    barx = [2, 3]
-    ballv = [random.choice([-1,0,1]), 1] # 速度は英語で Velocity
-    
-    # ボタン（AでもBでもOK）を押したらスタートする
-    while not button_a.was_pressed():
-        pass
+
     # ボタンAかBが押されたらスタートする
     while not button_a.was_pressed() and not button_b.was_pressed():
         pass
