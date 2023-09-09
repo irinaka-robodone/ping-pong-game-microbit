@@ -17,18 +17,11 @@ while True:
     ballx = 2
     bally = 0
     barx = (2,3)
-    ballv = [1, 1] # 速度は英語で Velocity
+    balld = [1, 1] # 方向は英語で Direction
+    v = 1/1000
+    ballv = [balld[0]*v, balld[1]*v] # 速度は英語で Velocity
     gameover = False
-    
-    # ゲームのステート初期化（ランダムでやる場合）
-    ballx = random.randrange(0, 4)
-    bally = random.randrange(0, 1)
-    barx = [2, 3]
-    ballv = [random.choice([-1,0,1]), 1] # 速度は英語で Velocity
-    
-    # ボタン（AでもBでもOK）を押したらスタートする
-    while not button_a.was_pressed():
-        pass
+
     # ボタンAかBが押されたらスタートする
     while not button_a.was_pressed() and not button_b.was_pressed():
         pass
@@ -39,8 +32,13 @@ while True:
     
     while not gameover:
         
+        # ボールの描画位置を更新する
+        ballx += ballv[0]
+        bally += ballv[1]
+        
         # ボールとバーの表示をする
-        display.set_pixel(ballx, bally, 9)
+        display.clear()
+        display.set_pixel(int(ballx), int(bally), 9)
         display.set_pixel(barx[0], 4, 9)
         display.set_pixel(barx[1], 4, 9)
     
@@ -55,23 +53,23 @@ while True:
         
         # バーのx座標が0より小さくなったり、4より大きくなったりしないようにする
         # 境界条件と言われるやつ
-        if barx[0] < 0: # 
+        if barx[0] < 0: # 左端に来た時の処理
             barx[0] = 0
             barx[1] = 1
-        elif barx[1] > 4:
+        elif barx[1] > 4: # 右端に来た時の処理
             barx[0] = 3
             barx[1] = 4
         
-        # ボールの進む向き（速度）が変わるようにする
-        if ballx == 0 and ballv[0] < 0:
-            ballv[0] = 1
-        elif ballx == 4 and ballv[0] > 0:
-            ballv[0] = -1
-        if bally == 0 and ballv[1] < 0:
-            ballv[1] = 1
-        if ballx in barx and bally == 3 and ballv[1] < 0:
-            ballv[1] = -1
+        # # ボールの進む向き（速度）が変わるようにする
+        if ballx <= 0 and balld[0] < 0: # ① 左端 (x=0)
+            balld[0] = 1
+        if ballx >= 4 and balld[0] > 0: # ② 右端 (x=4)
+            balld[0] = -1
+        if bally <= 0 and balld[1] < 0: # ③ 天井 (y=0)
+            balld[1] = 1
+        if bally >= 4 and balld[1] > 0: # ④ 底 (y=4)
+            balld[1] = -1
         
-        # ボールの座標を速度で更新する
-        ballx += int(ballv[0]* 0.001)
-        bally += int(ballv[1] * 0.001)
+        # ボールの進む向き、速さをもとにボールの速度を更新する
+        # v = 1/1000
+        ballv = [balld[0]*v, balld[1]*v] # 速度は英語で Velocity

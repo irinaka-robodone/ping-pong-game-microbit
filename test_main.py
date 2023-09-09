@@ -31,38 +31,39 @@ while True:
     while not gameover:
         
         # ボールとバーの表示をする
+        display.clear()
         display.set_pixel(ballx, bally, 9)
         display.set_pixel(barx[0], 4, 9)
         display.set_pixel(barx[1], 4, 9)
     
-        if button_a.was_pressed():
-            barx[0] -= 1
-            barx[1] -= 1
-        elif button_b.was_pressed():
-            barx[0] += 1
-            barx[1] += 1
-        else:
-            pass # ボタンが押されなければ何もしない
+        # if button_a.was_pressed():
+        #     barx[0] -= 1
+        #     barx[1] -= 1
+        # elif button_b.was_pressed():
+        #     barx[0] += 1
+        #     barx[1] += 1
+        # else:
+        #     pass # ボタンが押されなければ何もしない
         
-        # バーのx座標が0より小さくなったり、4より大きくなったりしないようにする
-        # 境界条件と言われるやつ
-        if barx[0] < 0: # 
-            barx[0] = 0
-            barx[1] = 1
-        elif barx[1] > 4:
-            barx[0] = 3
-            barx[1] = 4
+        # # バーのx座標が0より小さくなったり、4より大きくなったりしないようにする
+        # # 境界条件と言われるやつ
+        # if barx[0] < 0: # 
+        #     barx[0] = 0
+        #     barx[1] = 1
+        # elif barx[1] > 4:
+        #     barx[0] = 3
+        #     barx[1] = 4
         
-        # ボールの進む向き（速度）が変わるようにする
-        if ballx == 0 and ballv[0] < 0:
-            ballv[0] = 1
-        elif ballx == 4 and ballv[0] > 0:
-            ballv[0] = -1
-        if bally == 0 and ballv[1] < 0:
-            ballv[1] = 1
-        if ballx in barx and bally == 3 and ballv[1] < 0:
-            ballv[1] = -1
+        # # ボールの進む向き（速度）が変わるようにする
+        # if ballx == 0 and ballv[0] < 0:
+        #     ballv[0] = 1
+        # elif ballx == 4 and ballv[0] > 0:
+        #     ballv[0] = -1
+        # if bally == 0 and ballv[1] < 0:
+        #     ballv[1] = 1
+        # if ballx in barx and bally == 3 and ballv[1] < 0:
+        #     ballv[1] = -1
         
-        # ボールの座標を速度で更新する
-        ballx += int(ballv[0]* 0.001)
-        bally += int(ballv[1] * 0.001)
+        # # ボールの座標を速度で更新する
+        # ballx += int(ballv[0]* 0.001)
+        # bally += int(ballv[1] * 0.001)
